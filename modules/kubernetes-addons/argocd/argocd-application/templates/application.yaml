@@ -11,8 +11,10 @@ spec:
     repoURL: {{ .Values.source.repoUrl }}
     targetRevision: {{ .Values.source.targetRevision }}
     path: {{ .Values.source.path }}
+    {{- if .Values.add_on_application }}
     helm:
       values: {{ toYaml .Values.source.helm.values | toString | indent 6 }}
+    {{- end }}
   destination:
     server: {{ .Values.destination.server }}
     namespace: {{ .Values.namespace }}
