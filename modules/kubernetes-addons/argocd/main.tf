@@ -99,7 +99,7 @@ resource "kubernetes_secret" "argocd_gitops" {
 
   data = {
     name          = "${each.key}-repo"
-    type          = each.value.repo_type
+    type          = "git"     # Ignoring actual repo type, due to https://github.com/argoproj/argo-cd/issues/3568
     url           = each.value.repo_url
     sshPrivateKey = data.aws_secretsmanager_secret_version.ssh_key_version[each.key].secret_string
   }
