@@ -46,6 +46,11 @@ resource "helm_release" "argocd_application" {
   }
 
   set {
+    name = "source.repoType"
+    value = each.value.repo_type
+  }
+
+  set {
     name  = "source.targetRevision"
     value = each.value.target_revision
   }
@@ -93,7 +98,8 @@ resource "kubernetes_secret" "argocd_gitops" {
   }
 
   data = {
-    type          = "git"
+    name          = "${each.key}-repo"
+    type          = each.value.repo_type
     url           = each.value.repo_url
     sshPrivateKey = data.aws_secretsmanager_secret_version.ssh_key_version[each.key].secret_string
   }
