@@ -15,6 +15,10 @@ spec:
     helm:
       values: {{ toYaml .Values.source.helm.values | toString | indent 6 }}
     {{- end }}
+    {{- if eq .Values.source.repoType "git" }}
+    directory:
+      recurse: true
+    {{- end }}
   destination:
     server: {{ .Values.destination.server }}
     namespace: {{ .Values.namespace }}
