@@ -19,7 +19,7 @@ module "aws_coredns" {
   enable_amazon_eks_coredns = var.enable_amazon_eks_coredns
   addon_config = merge(
     {
-      kubernetes_version = var.eks_cluster_version
+      kubernetes_version = local.eks_cluster_version
     },
     var.amazon_eks_coredns_config,
   )
@@ -28,7 +28,7 @@ module "aws_coredns" {
   enable_self_managed_coredns = var.enable_self_managed_coredns
   helm_config = merge(
     {
-      kubernetes_version = var.eks_cluster_version
+      kubernetes_version = local.eks_cluster_version
     },
     var.self_managed_coredns_helm_config,
     {
@@ -308,6 +308,21 @@ module "yunikorn" {
   addon_context     = local.addon_context
 }
 
+module "csi_secrets_store_provider_aws" {
+  count             = var.enable_secrets_store_csi_driver_provider_aws ? 1 : 0
+  source            = "./csi-secrets-store-provider-aws"
+  helm_config       = var.csi_secrets_store_provider_aws_helm_config
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+}
+
+module "secrets_store_csi_driver" {
+  count             = var.enable_secrets_store_csi_driver ? 1 : 0
+  source            = "./secrets-store-csi-driver"
+  helm_config       = var.secrets_store_csi_driver_helm_config
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+}
 module "aws_privateca_issuer" {
   count                   = var.enable_aws_privateca_issuer ? 1 : 0
   source                  = "./aws-privateca-issuer"

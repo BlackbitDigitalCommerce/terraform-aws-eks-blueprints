@@ -42,16 +42,19 @@ variable "irsa_iam_permissions_boundary" {
 variable "eks_oidc_provider" {
   type        = string
   description = "The OpenID Connect identity provider (issuer URL without leading `https://`)"
+  default     = null
 }
 
 variable "eks_cluster_endpoint" {
   type        = string
   description = "Endpoint for your Kubernetes API server"
+  default     = null
 }
 
 variable "eks_cluster_version" {
   type        = string
   description = "The Kubernetes version for the cluster"
+  default     = null
 }
 
 #-----------EKS MANAGED ADD-ONS------------
@@ -799,4 +802,30 @@ variable "adot_collector_nginx_helm_config" {
   type        = any
   default     = {}
   description = "ADOT Collector Nginx Helm Chart config"
+}
+
+#-----------AWS CSI Secrets Store Provider-------------
+variable "enable_secrets_store_csi_driver_provider_aws" {
+  type        = bool
+  default     = false
+  description = "Enable AWS CSI Secrets Store Provider"
+}
+
+variable "csi_secrets_store_provider_aws_helm_config" {
+  type        = any
+  default     = null
+  description = "CSI Secrets Store Provider AWS Helm Configurations"
+}
+
+#-----------CSI Secrets Store Provider-------------
+variable "enable_secrets_store_csi_driver" {
+  type        = bool
+  default     = false
+  description = "Enable CSI Secrets Store Provider"
+}
+
+variable "secrets_store_csi_driver_helm_config" {
+  type        = any
+  default     = null
+  description = "CSI Secrets Store Provider Helm Configurations"
 }
