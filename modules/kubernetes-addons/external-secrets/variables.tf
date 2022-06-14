@@ -26,3 +26,9 @@ variable "addon_context" {
   })
   description = "Input configuration for the addon"
 }
+
+variable "irsa_policies" {
+  type        = list(string)
+  description = "IAM policies for a IAM role for service accounts"
+  default     = []
+}

@@ -380,6 +380,7 @@ module "external_secrets" {
   count             = var.enable_external_secrets ? 1 : 0
   source            = "./external-secrets"
   helm_config       = var.external_secrets_helm_config
+  irsa_policies     = var.external_secrets_irsa_policies
   manage_via_gitops = var.argocd_manage_add_ons
   addon_context     = local.addon_context
 }
