@@ -36,3 +36,9 @@ variable "addon_context" {
   })
   description = "Input configuration for the addon"
 }
+
+variable "dex_service_account_iam_role_arn" {
+  type        = string
+  default     = ""
+  description = "ARN of a service account to apply to Dex"
+}

@@ -375,3 +375,11 @@ module "adot_collector_nginx" {
   amazon_prometheus_workspace_region   = var.amazon_prometheus_workspace_region
   addon_context                        = local.addon_context
 }
+
+module "external_secrets" {
+  count             = var.enable_external_secrets ? 1 : 0
+  source            = "./external-secrets"
+  helm_config       = var.external_secrets_helm_config
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+}

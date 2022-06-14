@@ -829,3 +829,16 @@ variable "secrets_store_csi_driver_helm_config" {
   default     = null
   description = "CSI Secrets Store Provider Helm Configurations"
 }
+
+#-----------AWS CSI Secrets Store Provider-------------
+variable "enable_external_secrets" {
+  type        = bool
+  default     = false
+  description = "Enable External Secrets"
+}
+
+variable "external_secrets_helm_config" {
+  type        = any
+  default     = null
+  description = "External Secrets Helm Configuration"
+}
