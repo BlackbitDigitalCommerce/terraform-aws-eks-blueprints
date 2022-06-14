@@ -839,7 +839,7 @@ variable "enable_external_secrets" {
 
 variable "external_secrets_helm_config" {
   type        = any
-  default     = null
+  default     = {}
   description = "External Secrets Helm Configuration"
 }
 
