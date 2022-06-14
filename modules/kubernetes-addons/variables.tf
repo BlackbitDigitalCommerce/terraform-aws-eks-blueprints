@@ -837,6 +837,12 @@ variable "enable_external_secrets" {
   description = "Enable External Secrets"
 }
 
+variable "external_secrets_helm_config" {
+  type        = any
+  default     = null
+  description = "External Secrets Helm Configuration"
+}
+
 variable "external_secrets_irsa_policies" {
   type        = list(string)
   description = "IAM policies for a IAM role for service accounts"
