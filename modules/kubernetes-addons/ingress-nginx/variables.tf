@@ -26,6 +26,7 @@ variable "addon_context" {
 }
 
 variable "eip_allocations" {
-  type = string
-  description = "Comma-separated list of EIPs to allocate to the ingress"
+  type = list(string)
+  description = "List of EIPs to allocate to the ingress"
+  default = []
 }
