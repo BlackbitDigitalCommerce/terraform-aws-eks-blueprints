@@ -119,7 +119,7 @@ module "aws_load_balancer_controller" {
 }
 
 module "aws_node_termination_handler" {
-  count                   = var.enable_aws_node_termination_handler && length(var.auto_scaling_group_names) > 0 ? 1 : 0
+  count                   = var.enable_aws_node_termination_handler && (length(var.auto_scaling_group_names) > 0 || var.enable_karpenter) ? 1 : 0
   source                  = "./aws-node-termination-handler"
   helm_config             = var.aws_node_termination_handler_helm_config
   irsa_policies           = var.aws_node_termination_handler_irsa_policies
@@ -334,47 +334,109 @@ module "aws_privateca_issuer" {
   irsa_policies           = var.aws_privateca_issuer_irsa_policies
 }
 
+module "velero" {
+  count             = var.enable_velero ? 1 : 0
+  source            = "./velero"
+  helm_config       = var.velero_helm_config
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+  irsa_policies     = var.velero_irsa_policies
+  backup_s3_bucket  = var.velero_backup_s3_bucket
+}
+
 module "opentelemetry_operator" {
-  count         = var.enable_opentelemetry_operator ? 1 : 0
+  count         = var.enable_amazon_eks_adot || var.enable_opentelemetry_operator ? 1 : 0
   source        = "./opentelemetry-operator"
-  helm_config   = var.opentelemetry_operator_helm_config
   addon_context = local.addon_context
+
+  # Amazon EKS ADOT add
+  enable_amazon_eks_adot = var.enable_amazon_eks_adot
+  addon_config = merge(
+    {
+      kubernetes_version = var.eks_cluster_version
+    },
+    var.amazon_eks_adot_config,
+  )
+
+  # Self-managed OpenTelemetry Operator via Helm chart
+  enable_opentelemetry_operator = var.enable_opentelemetry_operator
+  helm_config                   = var.opentelemetry_operator_helm_config
 }
 
 module "adot_collector_java" {
-  count                                = var.enable_adot_collector_java ? 1 : 0
-  source                               = "./adot-collector-java"
-  helm_config                          = var.adot_collector_java_helm_config
+  count  = var.enable_adot_collector_java ? 1 : 0
+  source = "./adot-collector-java"
+
+  helm_config = merge(
+    var.adot_collector_java_helm_config,
+    {
+      # Using the output from the operator addon, this will ensure correct deployment order
+      operator_namespace = module.opentelemetry_operator[0].namespace
+    }
+  )
+
   amazon_prometheus_workspace_endpoint = var.amazon_prometheus_workspace_endpoint
   amazon_prometheus_workspace_region   = var.amazon_prometheus_workspace_region
   addon_context                        = local.addon_context
+
+  depends_on = [module.opentelemetry_operator]
 }
 
 module "adot_collector_haproxy" {
-  count                                = var.enable_adot_collector_haproxy ? 1 : 0
-  source                               = "./adot-collector-haproxy"
-  helm_config                          = var.adot_collector_haproxy_helm_config
+  count  = var.enable_adot_collector_haproxy ? 1 : 0
+  source = "./adot-collector-haproxy"
+
+  helm_config = merge(
+    var.adot_collector_haproxy_helm_config,
+    {
+      # Using the output from the operator addon, this will ensure correct deployment order
+      operator_namespace = module.opentelemetry_operator[0].namespace
+    }
+  )
+
   amazon_prometheus_workspace_endpoint = var.amazon_prometheus_workspace_endpoint
   amazon_prometheus_workspace_region   = var.amazon_prometheus_workspace_region
   addon_context                        = local.addon_context
+
+  depends_on = [module.opentelemetry_operator]
 }
 
 module "adot_collector_memcached" {
-  count                                = var.enable_adot_collector_memcached ? 1 : 0
-  source                               = "./adot-collector-memcached"
-  helm_config                          = var.adot_collector_memcached_helm_config
+  count  = var.enable_adot_collector_memcached ? 1 : 0
+  source = "./adot-collector-memcached"
+
+  helm_config = merge(
+    var.adot_collector_memcached_helm_config,
+    {
+      # Using the output from the operator addon, this will ensure correct deployment order
+      operator_namespace = module.opentelemetry_operator[0].namespace
+    }
+  )
+
   amazon_prometheus_workspace_endpoint = var.amazon_prometheus_workspace_endpoint
   amazon_prometheus_workspace_region   = var.amazon_prometheus_workspace_region
   addon_context                        = local.addon_context
+
+  depends_on = [module.opentelemetry_operator]
 }
 
 module "adot_collector_nginx" {
-  count                                = var.enable_adot_collector_nginx ? 1 : 0
-  source                               = "./adot-collector-nginx"
-  helm_config                          = var.adot_collector_nginx_helm_config
+  count  = var.enable_adot_collector_nginx ? 1 : 0
+  source = "./adot-collector-nginx"
+
+  helm_config = merge(
+    var.adot_collector_nginx_helm_config,
+    {
+      # Using the output from the operator addon, this will ensure correct deployment order
+      operator_namespace = module.opentelemetry_operator[0].namespace
+    }
+  )
+
   amazon_prometheus_workspace_endpoint = var.amazon_prometheus_workspace_endpoint
   amazon_prometheus_workspace_region   = var.amazon_prometheus_workspace_region
   addon_context                        = local.addon_context
+
+  depends_on = [module.opentelemetry_operator]
 }
 
 module "external_secrets" {
