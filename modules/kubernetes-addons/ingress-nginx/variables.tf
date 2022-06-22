@@ -24,3 +24,8 @@ variable "addon_context" {
   })
   description = "Input configuration for the addon"
 }
+
+variable "eip_allocations" {
+  type = string
+  description = "Comma-separated list of EIPs to allocate to the ingress"
+}

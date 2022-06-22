@@ -437,6 +437,12 @@ variable "ingress_nginx_helm_config" {
   default     = {}
 }
 
+variable "ingress_nginx_eip_allocations" {
+  description = "Comma-separated list of EIPs to allocate to the ingress"
+  type        = string
+  default     = ""
+}
+
 #-----------SPARK K8S OPERATOR-------------
 variable "enable_spark_k8s_operator" {
   type        = bool

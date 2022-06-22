@@ -23,5 +23,6 @@ locals {
 
   argocd_gitops_config = {
     enable = true
+    eipAllocations = var.eip_allocations
   }
 }
