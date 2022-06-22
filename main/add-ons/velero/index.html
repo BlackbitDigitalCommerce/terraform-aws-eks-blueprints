@@ -13,7 +13,7 @@
     
     
       
-        <title>Amazon EKS Add-ons - Amazon EKS Blueprints for Terraform</title>
+        <title>Velero - Amazon EKS Blueprints for Terraform</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#amazon-eks-add-ons" class="md-skip">
+        <a href="#velero" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +99,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Amazon EKS Add-ons
+              Velero
             
           </span>
         </div>
@@ -624,52 +624,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Amazon EKS Add-ons
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../managed-add-ons/" class="md-nav__link">
         Amazon EKS Add-ons
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#updating-managed-add-ons" class="md-nav__link">
-    Updating Managed Add-ons
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -791,11 +750,59 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../velero/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Velero
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Velero
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    Validate
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -995,8 +1002,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#updating-managed-add-ons" class="md-nav__link">
-    Updating Managed Add-ons
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    Validate
   </a>
   
 </li>
@@ -1013,107 +1027,165 @@
             <article class="md-content__inner md-typeset">
               
                 
-  <a href="https://github.com/aws-ia/terraform-aws-eks-blueprints/edit/main/docs/add-ons/managed-add-ons.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/aws-ia/terraform-aws-eks-blueprints/edit/main/docs/add-ons/velero.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
 
-<h1 id="amazon-eks-add-ons">Amazon EKS Add-ons<a class="headerlink" href="#amazon-eks-add-ons" title="Permanent link">&para;</a></h1>
-<p><a href="https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html">Amazon EKS add-ons</a> provide installation and management of a curated set of add-ons for Amazon EKS clusters. All Amazon EKS add-ons include the latest security patches, bug fixes, and are validated by AWS to work with Amazon EKS. Amazon EKS add-ons allow you to consistently ensure that your Amazon EKS clusters are secure and stable and reduce the amount of work that you need to do in order to install, configure, and update add-ons.</p>
-<p>EKS currently provides support for the following managed add-ons.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html">Amazon VPC CNI</a></td>
-<td>Native VPC networking for Kubernetes pods.</td>
-</tr>
-<tr>
-<td><a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html">CoreDNS</a></td>
-<td>A flexible, extensible DNS server that can serve as the Kubernetes cluster DNS.</td>
-</tr>
-<tr>
-<td><a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html">kube-proxy</a></td>
-<td>Enables network communication to your pods.</td>
-</tr>
-<tr>
-<td><a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html">Amazon EBS CSI</a></td>
-<td>Manage the Amazon EBS CSI driver as an Amazon EKS add-on.</td>
-</tr>
-</tbody>
-</table>
-<p>EKS managed add-ons can be enabled via the following.</p>
-<p>Note: EKS managed Add-ons can be converted to self-managed add-on with <code>preserve</code> field.
-<code>preserve=true</code> option removes Amazon EKS management of any settings and the ability for Amazon EKS to notify you of updates and automatically update the Amazon EKS add-on after you initiate an update, but preserves the add-on's software on your cluster.
-This option makes the add-on a self-managed add-on, rather than an Amazon EKS add-on.
-There is no downtime while deleting EKS managed Add-ons when <code>preserve=true</code>. This is a default option for <code>enable_amazon_eks_vpc_cni</code> , <code>enable_amazon_eks_coredns</code> and <code>enable_amazon_eks_kube_proxy</code>.</p>
-<p>Checkout this <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#updating-vpc-cni-eks-add-on">doc</a> for more details.</p>
-<div class="highlight"><pre><span></span><code># EKS Addons
-  enable_amazon_eks_vpc_cni = true # default is false
-  #Optional
-  amazon_eks_vpc_cni_config = {
-    addon_name               = &quot;vpc-cni&quot;
-    addon_version            = &quot;v1.10.1-eksbuild.1&quot;
-    service_account          = &quot;aws-node&quot;
-    resolve_conflicts        = &quot;OVERWRITE&quot;
-    namespace                = &quot;kube-system&quot;
-    service_account_role_arn = &quot;&quot;
-    preserve                 = true
-    additional_iam_policies  = []
-    tags                     = {}
-  }
-
-  enable_amazon_eks_coredns = true # default is false
-  #Optional
-  amazon_eks_coredns_config = {
-    addon_name               = &quot;coredns&quot;
-    addon_version            = &quot;v1.8.4-eksbuild.1&quot;
-    service_account          = &quot;coredns&quot;
-    resolve_conflicts        = &quot;OVERWRITE&quot;
-    namespace                = &quot;kube-system&quot;
-    service_account_role_arn = &quot;&quot;
-    preserve                 = true
-    additional_iam_policies  = []
-    tags                     = {}
-  }
-
-  enable_amazon_eks_kube_proxy = true # default is false
-  #Optional
-  amazon_eks_kube_proxy_config = {
-    addon_name               = &quot;kube-proxy&quot;
-    addon_version            = &quot;v1.21.2-eksbuild.2&quot;
-    service_account          = &quot;kube-proxy&quot;
-    resolve_conflicts        = &quot;OVERWRITE&quot;
-    namespace                = &quot;kube-system&quot;
-    service_account_role_arn = &quot;&quot;
-    preserve                 = true
-    additional_iam_policies  = []
-    tags                     = {}
-  }
-
-  enable_amazon_eks_aws_ebs_csi_driver = true # default is false
-  #Optional
-  amazon_eks_aws_ebs_csi_driver_config = {
-    addon_name               = &quot;aws-ebs-csi-driver&quot;
-    addon_version            = &quot;v1.4.0-eksbuild.preview&quot;
-    service_account          = &quot;ebs-csi-controller-sa&quot;
-    resolve_conflicts        = &quot;OVERWRITE&quot;
-    namespace                = &quot;kube-system&quot;
-    additional_iam_policies  = []
-    service_account_role_arn = &quot;&quot;
-    tags                     = {}
-  }
+<h1 id="velero">Velero<a class="headerlink" href="#velero" title="Permanent link">&para;</a></h1>
+<p><a href="https://velero.io/">Velero</a> is an open source tool to safely backup and restore, perform disaster recovery, and migrate Kubernetes cluster resources and persistent volumes.</p>
+<ul>
+<li><a href="https://github.com/vmware-tanzu/helm-charts/tree/main/charts/velero">Helm chart</a></li>
+<li><a href="https://github.com/vmware-tanzu/velero-plugin-for-aws">Plugin for AWS</a></li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/aws-ia/terraform-aws-eks-blueprints/tree/main/modules/kubernetes-addons/velero">Velero</a> can be deployed by enabling the add-on via the following.</p>
+<div class="highlight"><pre><span></span><code>enable_velero           = true
+velero_backup_s3_bucket = &quot;&lt;YOUR_BUCKET_NAME&gt;&quot;
 </code></pre></div>
-<h2 id="updating-managed-add-ons">Updating Managed Add-ons<a class="headerlink" href="#updating-managed-add-ons" title="Permanent link">&para;</a></h2>
-<p>EKS won't modify any of your Kubernetes add-ons when you update a cluster to a newer Kubernetes version. As a result, it is important to upgrade EKS add-ons each time you upgrade an EKS cluster.</p>
-<p>Our <a href="../../advanced/cluster-upgrades/">Cluster Upgrade</a> guide demonstrates how you can leverage this framework to upgrade your EKS cluster in addition to the EKS managed add-ons running in each cluster.</p>
-<p>Additional information on updating a EKS cluster can be found in the <a href="https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html">EKS documentation</a>.</p>
+<p>You can also customize the Helm chart that deploys <code>velero</code> via the following configuration:</p>
+<div class="highlight"><pre><span></span><code>enable_velero           = true
+velero_helm_config = {
+  name        = &quot;velero&quot;
+  description = &quot;A Helm chart for velero&quot;
+  chart       = &quot;velero&quot;
+  version     = &quot;2.29.8&quot;
+  repository  = &quot;https://vmware-tanzu.github.io/helm-charts/&quot;
+  namespace   = &quot;velero&quot;
+  values = [templatefile(&quot;${path.module}/values.yaml&quot;, {
+    backup_s3_bucket = &quot;&lt;YOUR_BUCKET_NAME&gt;&quot;,
+  })]
+
+  set_values = [
+    {
+      name  = &quot;serviceAccount.server.name&quot;
+      value = local.name
+    },
+    {
+      name  = &quot;serviceAccount.server.create&quot;
+      value = false
+    }
+  ]
+}
+</code></pre></div>
+<p>To see a working example, see the <a href="https://github.com/aws-ia/terraform-aws-eks-blueprints/tree/main/examples/stateful"><code>stateful</code></a> example blueprint.</p>
+<h2 id="validate">Validate<a class="headerlink" href="#validate" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Run <code>update-kubeconfig</code> command:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>aws eks --region &lt;REGION&gt; update-kubeconfig --name &lt;CLSUTER_NAME&gt;
+</code></pre></div>
+<ol>
+<li>Test by listing velero resources provisioned:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl get all -n velero
+
+<span class="c1"># Output should look similar to below</span>
+NAME                         READY   STATUS    RESTARTS   AGE
+pod/velero-b4d8fd5c7-5smp6   <span class="m">1</span>/1     Running   <span class="m">0</span>          112s
+
+NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>    AGE
+service/velero   ClusterIP   <span class="m">172</span>.20.217.203   &lt;none&gt;        <span class="m">8085</span>/TCP   114s
+
+NAME                     READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/velero   <span class="m">1</span>/1     <span class="m">1</span>            <span class="m">1</span>           114s
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/velero-b4d8fd5c7   <span class="m">1</span>         <span class="m">1</span>         <span class="m">1</span>       114s
+</code></pre></div>
+<ol>
+<li>Get backup location using velero <a href="https://velero.io/docs/v1.8/basic-install/#install-the-cli">CLI</a></li>
+</ol>
+<div class="highlight"><pre><span></span><code>velero backup-location get
+
+<span class="c1"># Output should look similar to below</span>
+NAME      PROVIDER   BUCKET/PREFIX             PHASE       LAST VALIDATED                  ACCESS MODE   DEFAULT
+default   aws        velero-ssqwm44hvofzb32d   Available   <span class="m">2022</span>-05-22 <span class="m">10</span>:53:26 -0400 EDT   ReadWrite     <span class="nb">true</span>
+</code></pre></div>
+<ol>
+<li>To demonstrate creating a backup and restoring, create a new namespace and run nginx using below commands:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl create namespace backupdemo
+kubectl run nginx --image<span class="o">=</span>nginx -n backupdemo
+</code></pre></div>
+<ol>
+<li>Create backup of this namespace using velero</li>
+</ol>
+<div class="highlight"><pre><span></span><code>velero backup create backup1 --include-namespaces backupdemo
+
+<span class="c1"># Output should look similar to below</span>
+Backup request <span class="s2">&quot;backup1&quot;</span> submitted successfully.
+Run <span class="sb">`</span>velero backup describe backup1<span class="sb">`</span> or <span class="sb">`</span>velero backup logs backup1<span class="sb">`</span> <span class="k">for</span> more details.
+</code></pre></div>
+<ol>
+<li>Describe the backup to check the backup status</li>
+</ol>
+<div class="highlight"><pre><span></span><code>velero backup describe backup1
+
+<span class="c1"># Output should look similar to below</span>
+Name:         backup1
+Namespace:    velero
+Labels:       velero.io/storage-location<span class="o">=</span>default
+Annotations:  velero.io/source-cluster-k8s-gitversion<span class="o">=</span>v1.21.9-eks-14c7a48
+              velero.io/source-cluster-k8s-major-version<span class="o">=</span><span class="m">1</span>
+              velero.io/source-cluster-k8s-minor-version<span class="o">=</span><span class="m">21</span>+
+
+Phase:  Completed
+
+Errors:    <span class="m">0</span>
+Warnings:  <span class="m">0</span>
+
+Namespaces:
+  Included:  backupdemo
+  Excluded:  &lt;none&gt;
+
+Resources:
+  Included:        *
+  Excluded:        &lt;none&gt;
+  Cluster-scoped:  auto
+
+Label selector:  &lt;none&gt;
+
+Storage Location:  default
+
+Velero-Native Snapshot PVs:  auto
+
+TTL:  720h0m0s
+
+Hooks:  &lt;none&gt;
+
+Backup Format Version:  <span class="m">1</span>.1.0
+
+Started:    <span class="m">2022</span>-05-22 <span class="m">10</span>:54:32 -0400 EDT
+Completed:  <span class="m">2022</span>-05-22 <span class="m">10</span>:54:35 -0400 EDT
+
+Expiration:  <span class="m">2022</span>-06-21 <span class="m">10</span>:54:32 -0400 EDT
+
+Total items to be backed up:  <span class="m">10</span>
+Items backed up:              <span class="m">10</span>
+
+Velero-Native Snapshots: &lt;none included&gt;
+</code></pre></div>
+<ol>
+<li>Delete the namespace - this will be restored using the backup created</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl delete namespace backupdemo
+</code></pre></div>
+<ol>
+<li>Restore the namespace from your backup</li>
+</ol>
+<div class="highlight"><pre><span></span><code>velero restore create --from-backup backup1
+</code></pre></div>
+<ol>
+<li>Verify that the namespace is restored</li>
+</ol>
+<div class="highlight"><pre><span></span><code>kubectl get all -n backupdemo
+
+<span class="c1"># Output should look similar to below</span>
+NAME        READY   STATUS    RESTARTS   AGE
+pod/nginx   <span class="m">1</span>/1     Running   <span class="m">0</span>          21s
+</code></pre></div>
 
               
             </article>
@@ -1129,7 +1201,7 @@ There is no downtime while deleting EKS managed Add-ons when <code>preserve=true
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../kubernetes-dashboard/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Kubernetes Dashboard" rel="prev">
+        <a href="../vault/" class="md-footer__link md-footer__link--prev" aria-label="Previous: HashiCorp Vault" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -1138,20 +1210,20 @@ There is no downtime while deleting EKS managed Add-ons when <code>preserve=true
               <span class="md-footer__direction">
                 Previous
               </span>
-              Kubernetes Dashboard
+              HashiCorp Vault
             </div>
           </div>
         </a>
       
       
         
-        <a href="../metrics-server/" class="md-footer__link md-footer__link--next" aria-label="Next: Metrics Server" rel="next">
+        <a href="../vpa/" class="md-footer__link md-footer__link--next" aria-label="Next: Vertical Pod Autoscaler" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Metrics Server
+              Vertical Pod Autoscaler
             </div>
           </div>
           <div class="md-footer__button md-icon">
