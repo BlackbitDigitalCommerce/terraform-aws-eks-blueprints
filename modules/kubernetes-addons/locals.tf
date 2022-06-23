@@ -32,6 +32,7 @@ locals {
     secretsStoreCsiDriver      = var.enable_secrets_store_csi_driver ? module.secrets_store_csi_driver[0].argocd_gitops_config : null
     csiSecretsStoreProviderAws = var.enable_secrets_store_csi_driver_provider_aws ? module.csi_secrets_store_provider_aws[0].argocd_gitops_config : null
     externalSecrets            = var.enable_external_secrets ? module.external_secrets[0].argocd_gitops_config : null
+    argocdImageUpdater         = var.enable_argocd_image_updater ? module.argocd_image_updater[0].argocd_gitops_config : null
   }
 
   addon_context = {
