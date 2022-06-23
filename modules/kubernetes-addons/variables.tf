@@ -895,3 +895,22 @@ variable "external_secrets_irsa_policies" {
   description = "IAM policies for a IAM role for service accounts"
   default     = []
 }
+
+#-----------ArgoCD Image Updater-------------
+variable "enable_argocd_image_updater" {
+  type        = bool
+  default     = false
+  description = "Enable ArgoCD Image Updater"
+}
+
+variable "argocd_image_updater_helm_config" {
+  type        = any
+  default     = {}
+  description = "External Secrets Helm Configuration"
+}
+
+variable "argocd_image_updater_irsa_policies" {
+  type        = list(string)
+  description = "IAM policies for a IAM role for service accounts"
+  default     = []
+}

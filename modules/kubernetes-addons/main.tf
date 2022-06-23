@@ -447,3 +447,12 @@ module "external_secrets" {
   manage_via_gitops = var.argocd_manage_add_ons
   addon_context     = local.addon_context
 }
+
+module "argocd_image_updater" {
+  count             = var.enable_argocd_image_updater ? 1 : 0
+  source            = "./argocd-image-updater"
+  helm_config       = var.argocd_image_updater_helm_config
+  irsa_policies     = var.argocd_image_updater_irsa_policies
+  manage_via_gitops = var.argocd_manage_add_ons
+  addon_context     = local.addon_context
+}
