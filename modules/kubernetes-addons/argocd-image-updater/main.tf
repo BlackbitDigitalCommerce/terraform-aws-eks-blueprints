@@ -15,6 +15,4 @@ module "helm_addon" {
   helm_config       = local.helm_config
   irsa_config       = local.irsa_config
   addon_context     = var.addon_context
-
-  depends_on = [kubernetes_namespace_v1.argocd_image_updater]
 }
