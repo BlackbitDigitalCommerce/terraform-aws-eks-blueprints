@@ -607,6 +607,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../add-ons/cluster-proportional-autoscaler/" class="md-nav__link">
+        Horizontal cluster-proportional-autoscaler container
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../add-ons/crossplane/" class="md-nav__link">
         Crossplane
       </a>
@@ -637,6 +651,20 @@
     <li class="md-nav__item">
       <a href="../add-ons/external-dns/" class="md-nav__link">
         ExternalDNS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../add-ons/external-secrets/" class="md-nav__link">
+        External Secrets Operator
       </a>
     </li>
   
@@ -1249,6 +1277,10 @@ The authenticator gets its configuration information from the <code>aws-auth</co
           Name        = &quot;m4-on-demand&quot;
           subnet_type = &quot;private&quot;
         }
+        launch_template_tags = {
+          SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+          SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
+        }
       }
     }
 </code></pre></div>
@@ -1299,6 +1331,10 @@ The authenticator gets its configuration information from the <code>aws-auth</co
         Name        = &quot;m5x-on-demand&quot;
         subnet_type = &quot;private&quot;
       }
+      launch_template_tags = {
+        SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+        SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
+      }
     }
 
     #---------------------------------------------------------#
@@ -1306,7 +1342,7 @@ The authenticator gets its configuration information from the <code>aws-auth</co
     #---------------------------------------------------------#
     arm = {
       # 1&gt; Node Group configuration - Part1
-      node_group_name        = &quot;arm-mg5&quot;         # Max 40 characters for node group name
+      node_group_name        = &quot;arm-m6g-2vcpu-8gb&quot;         # Max 40 characters for node group name
       create_launch_template = true              # false will use the default launch template
       launch_template_os     = &quot;amazonlinux2eks&quot; # amazonlinux2eks or bottlerocket
       public_ip              = false             # Use this to enable public IP for EC2 instances; only for public subnets used in launch templates ;
@@ -1323,7 +1359,7 @@ The authenticator gets its configuration information from the <code>aws-auth</co
       # 3&gt; Node Group compute configuration
       ami_type       = &quot;AL2_ARM_64&quot; # AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64
       capacity_type  = &quot;ON_DEMAND&quot;  # ON_DEMAND or SPOT
-      instance_types = [&quot;m5.large&quot;] # List of instances to get capacity from multipe pools
+      instance_types = [&quot;m6g.large&quot;] # List of instances to get capacity from multipe pools
       block_device_mappings = [
         {
           device_name = &quot;/dev/xvda&quot;
@@ -1342,9 +1378,13 @@ The authenticator gets its configuration information from the <code>aws-auth</co
         WorkerType  = &quot;ON_DEMAND&quot;
       }
       additional_tags = {
-        ExtraTag    = &quot;m5x-on-demand&quot;
-        Name        = &quot;m5x-on-demand&quot;
+        ExtraTag    = &quot;m6g-on-demand&quot;
+        Name        = &quot;m6g-on-demand&quot;
         subnet_type = &quot;private&quot;
+      }
+      launch_template_tags = {
+        SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+        SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
       }
     }
 
@@ -1367,7 +1407,7 @@ The authenticator gets its configuration information from the <code>aws-auth</co
       # 3&gt; Node Group compute configuration
       ami_type       = &quot;BOTTLEROCKET_ARM_64&quot; # AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64, CUSTOM, BOTTLEROCKET_ARM_64, BOTTLEROCKET_x86_64
       capacity_type  = &quot;ON_DEMAND&quot;           # ON_DEMAND or SPOT
-      instance_types = [&quot;m5.large&quot;]          # List of instances to get capacity from multipe pools
+      instance_types = [&quot;m6g.large&quot;]          # List of instances to get capacity from multipe pools
       disk_size      = 50
 
       # 4&gt; Node Group network configuration
@@ -1381,9 +1421,13 @@ The authenticator gets its configuration information from the <code>aws-auth</co
         WorkerType  = &quot;ON_DEMAND&quot;
       }
       additional_tags = {
-        ExtraTag    = &quot;m5x-on-demand&quot;
-        Name        = &quot;m5x-on-demand&quot;
+        ExtraTag    = &quot;m6g-on-demand&quot;
+        Name        = &quot;m6g-on-demand&quot;
         subnet_type = &quot;private&quot;
+      }
+      launch_template_tags = {
+        SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+        SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
       }
     }
 
@@ -1429,6 +1473,10 @@ The authenticator gets its configuration information from the <code>aws-auth</co
         ExtraTag    = &quot;m5x-on-demand&quot;
         Name        = &quot;m5x-on-demand&quot;
         subnet_type = &quot;private&quot;
+      }
+      launch_template_tags = {
+        SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+        SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
       }
     }
 
@@ -1512,6 +1560,10 @@ The authenticator gets its configuration information from the <code>aws-auth</co
         ExtraTag    = &quot;mng-custom-ami&quot;
         Name        = &quot;mng-custom-ami&quot;
         subnet_type = &quot;private&quot;
+      }
+      launch_template_tags = {
+        SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+        SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
       }
     }
 </code></pre></div>
@@ -1647,6 +1699,10 @@ The authenticator gets its configuration information from the <code>aws-auth</co
           ExtraTag    = &quot;m5x-on-demand&quot;
           Name        = &quot;m5x-on-demand&quot;
           subnet_type = &quot;private&quot;
+        }
+        launch_template_tags = {
+          SomeAwsProviderDefaultTag1: &quot;TRUE&quot;
+          SomeAwsProviderDefaultTag2: &quot;TRUE&quot;
         }
         additional_iam_policies = []
       },
