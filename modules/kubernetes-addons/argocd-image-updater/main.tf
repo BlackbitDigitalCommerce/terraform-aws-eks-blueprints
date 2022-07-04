@@ -1,12 +1,12 @@
-resource "kubernetes_namespace_v1" "argocd_image_updater" {
-  metadata {
-    name = local.namespace
-
-    labels = {
-      "app.kubernetes.io/managed-by" = "terraform-aws-eks-blueprints"
-    }
-  }
-}
+#resource "kubernetes_namespace_v1" "argocd_image_updater" {
+#  metadata {
+#    name = local.namespace
+#
+#    labels = {
+#      "app.kubernetes.io/managed-by" = "terraform-aws-eks-blueprints"
+#    }
+#  }
+#}
 
 module "helm_addon" {
   source            = "../helm-addon"
