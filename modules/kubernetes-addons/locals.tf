@@ -6,6 +6,7 @@ locals {
 
   # Configuration for managing add-ons via ArgoCD.
   argocd_addon_config = {
+    corednsAutoscaler         = var.enable_amazon_eks_coredns && var.enable_coredns_autoscaler && length(var.coredns_autoscaler_helm_config) > 0 ? module.coredns_autoscaler[0].argocd_gitops_config : null
     agones                     = var.enable_agones ? module.agones[0].argocd_gitops_config : null
     awsEfsCsiDriver            = var.enable_aws_efs_csi_driver ? module.aws_efs_csi_driver[0].argocd_gitops_config : null
     awsForFluentBit            = var.enable_aws_for_fluentbit ? module.aws_for_fluent_bit[0].argocd_gitops_config : null
