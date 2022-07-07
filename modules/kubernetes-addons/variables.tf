@@ -933,3 +933,16 @@ variable "argocd_image_updater_irsa_policies" {
   description = "IAM policies for a IAM role for service accounts"
   default     = []
 }
+
+#----------- Kubecost -------------
+variable "enable_kubecost" {
+  type        = bool
+  default     = false
+  description = "Enable Kubecost"
+}
+
+variable "kubecost_irsa_policies" {
+  type        = list(string)
+  description = "IAM policies for a IAM role for service accounts"
+  default     = []
+}
