@@ -1,6 +1,6 @@
 resource "kubernetes_namespace_v1" "kubecost" {
   metadata {
-    name = local.name
+    name = local.namespace
 
     labels = {
       "app.kubernetes.io/managed-by" = "terraform-aws-eks-blueprints"
