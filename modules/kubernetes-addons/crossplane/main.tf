@@ -33,7 +33,7 @@ resource "kubectl_manifest" "aws_provider" {
     aws-provider-name    = local.aws_provider_sa
   })
   wait       = true
-  depends_on = [kubectl_manifest.aws_controller_config]
+#  depends_on = [kubectl_manifest.aws_controller_config]
 }
 
 # Wait for the AWS Provider CRDs to be fully created before initiating aws_provider_config deployment
@@ -53,7 +53,7 @@ module "aws_provider_irsa" {
   irsa_iam_policies                 = concat([aws_iam_policy.aws_provider[0].arn], var.aws_provider.additional_irsa_policies)
   addon_context                     = var.addon_context
 
-  depends_on = [kubectl_manifest.aws_provider]
+#  depends_on = [kubectl_manifest.aws_provider]
 }
 
 resource "aws_iam_policy" "aws_provider" {
